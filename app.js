@@ -1,10 +1,15 @@
+require("dotenv").config()
 const express = require("express");
 const app = express();
+const PORT= process.env.PORT ||8000;
 const todoRoute=require('./routes/todos');
 
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 
+// export  process.env.myName='dasds'
+console.log('My name is ',process.env.myName)
+console.log('MONGO_URL is ',process.env.MONGO_URL)
 
 app.get("/hello", (req, res) => {
     res.send("hello world");
@@ -16,4 +21,4 @@ app.use('/todos',todoRoute);
 app.get('/',(req,res)=>res.send('hello from backend'));
 
 
-app.listen(3333, () => console.log("server staretd on 3333"));
+app.listen(PORT, () => console.log("server staretd on "+PORT));
